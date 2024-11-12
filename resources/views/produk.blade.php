@@ -28,9 +28,10 @@
     <h3>{{$item->nama_produk}}</h3>
     <p class="price">{{$item->harga}}</p>
     <p class="description">{{$item->deskripsi}}</p>
-    <a href="/produk/upd/{{$item->kode_produk}}" class="btn btn-primary">Edit</a>
+    {{-- <a href="/produk/upd/{{$item->kode_produk}}" class="btn btn-primary">Edit</a> --}}
+    <a href="{{ url(Auth::user()->role.'/produk/upd/'.$item->kode_produk) }}" class="btn btn-primary">Edit</a>
     {{-- <button class="cancel-to-cart"> Delete </button> --}}
-    <form action="{{url('produk/delete/'.$item->kode_produk)}}" method="POST">
+    <form action="{{url(Auth::user()->role.'/produk/delete/'.$item->kode_produk)}}" method="POST">
         @csrf
         @method('DELETE')
         <button type="submit" class=" btn btn-danger">Delete</button>
@@ -48,7 +49,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="{{url('/produk/add')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{url(Auth::user()->role.'/produk/add')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label for="nama_produk">Nama Produk</label>
